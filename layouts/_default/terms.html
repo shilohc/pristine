@@ -1,0 +1,21 @@
+{{ partialCached "header/head.html" . }}
+  <div id="main">
+    {{ partial "nav.html" . }}
+    <h1>{{ .Title }}</h1>
+
+{{ $type := .Type }}
+{{ range $key, $value := .Data.Terms.ByCount }}
+  {{ $name := .Name }}
+  {{ $count := .Count }}
+  {{ with $.Site.GetPage (printf "/%s/%s" $type $name) }}
+  <p>
+    <a class="btn" href="{{ .Permalink }}">{{ $name }}</a>
+    - <span class="code">{{ $count }}</span> post(s)
+  </p>
+  {{ end }}
+{{ end }}
+
+</div>
+
+{{ partial "sidemenu.html" . }}
+

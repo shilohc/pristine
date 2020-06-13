@@ -5,17 +5,13 @@
 
     <h1>{{ .Title }}</h1>
     <ul>
-    {{ range .Site.RegularPages }}
-      {{ if eq .Type "posts" }}
-        <li>
-          <a href="{{ .Permalink }}">{{ .Title }}</a>
-           - {{ .Date.Format "Jan 2, 2006" }}</li>
-      {{ end }}
+    {{ range .Pages.ByPublishDate.Reverse }}
+      <li>
+        <a href="{{ .Permalink }}">{{ .Title }}</a>
+        - {{ .Date.Format "Jan 2, 2006" }}</li>
     {{ end }}
     </ul>
   </div>
 
 {{ partial "sidemenu.html" . }}
 {{ partialCached "footer/foot.html" . }}
-
-

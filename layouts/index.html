@@ -2,14 +2,18 @@
 
   <div id="main">
     {{ partial "nav.html" . }}
-    <h1 class="animated flipInX"><a href="/">{{ .Title }}</a></h1>
+    <h1><a href="/">{{ .Title }}</a></h1>
     <div class="talkies">
-        {{ .Content }}
+      {{ .Content }}
+
+      {{ range first 10 .Site.RegularPages }}
+        {{ if eq .Type "posts" }}
+        <h3 style="font-family:'Fira Code';"><a href="{{ .Permalink }}" style="text-decoration:none;">{{ .Title }}</a></h3>
+          <p>{{ .Summary }} <a href="{{ .Permalink }}">Read more...</a></p>
+        {{ end }}
+      {{ end }}
     </div>
 
-    {{ if isset .Site.Params "social" }}
-        {{ partialCached "social.html" . }}
-    {{ end }}
   </div>
 
   
